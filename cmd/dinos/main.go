@@ -11,7 +11,7 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	marvlib.API.ConsoleBoot(
-		"gp-rpg-gbj",
+		"dinos",
 		cartridge.Resources,
 		cartridge.Start,
 		cartridge.Update,
