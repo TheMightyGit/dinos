@@ -48,6 +48,9 @@ func randomArenaStartPos(colour int) image.Rectangle {
 }
 
 func Start() {
+	bgX = 0
+	Dinos = []*Dino{}
+
 	bg1 = api.SpritesGet(SpriteBG1)
 	bg1.ChangePos(image.Rect(0, 0, 320, 200))
 	bg1.Show(GfxBankBG, api.MapBanksGet(MapBankDinos).GetArea(MapBankBGArea))
