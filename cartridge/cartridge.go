@@ -5,7 +5,6 @@ import (
 	"image"
 	"math/rand"
 
-	"github.com/TheMightyGit/marv/marvlib"
 	"github.com/TheMightyGit/marv/marvtypes"
 )
 
@@ -32,9 +31,9 @@ const (
 )
 
 var (
+	API marvtypes.MarvAPI
 	bg1 marvtypes.Sprite
 	bg2 marvtypes.Sprite
-	api = marvlib.API
 )
 
 func randomArenaStartPos(colour int) image.Rectangle {
@@ -47,24 +46,23 @@ func randomArenaStartPos(colour int) image.Rectangle {
 	}
 }
 
-func Start() {
-	bgX = 0
-	Dinos = []*Dino{}
+func Start(api marvtypes.MarvAPI) {
+	API = api
 
-	bg1 = api.SpritesGet(SpriteBG1)
+	bg1 = API.SpritesGet(SpriteBG1)
 	bg1.ChangePos(image.Rect(0, 0, 320, 200))
-	bg1.Show(GfxBankBG, api.MapBanksGet(MapBankDinos).GetArea(MapBankBGArea))
+	bg1.Show(GfxBankBG, API.MapBanksGet(MapBankDinos).GetArea(MapBankBGArea))
 
-	bg2 = api.SpritesGet(SpriteBG2)
+	bg2 = API.SpritesGet(SpriteBG2)
 	bg2.ChangePos(image.Rect(320, 0, 320, 200))
-	bg2.Show(GfxBankBG, api.MapBanksGet(MapBankDinos).GetArea(MapBankBGArea))
+	bg2.Show(GfxBankBG, API.MapBanksGet(MapBankDinos).GetArea(MapBankBGArea))
 
 	for i := SpriteStart; i <= SpriteEnd; i++ {
 		colour := rand.Intn(4)
-		Dinos = append(Dinos, NewDino(api.SpritesGet(i), randomArenaStartPos(colour), colour))
+		Dinos = append(Dinos, NewDino(API.SpritesGet(i), randomArenaStartPos(colour), colour))
 	}
 	// marv.ModBanks[0].Play()
-	api.SfxBanksGet(0).PlayLooped()
+	API.SfxBanksGet(0).PlayLooped()
 }
 
 var (
@@ -82,5 +80,5 @@ func Update() {
 	for _, dino := range Dinos {
 		dino.Update()
 	}
-	api.SpritesSort()
+	API.SpritesSort()
 }

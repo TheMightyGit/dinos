@@ -20,7 +20,7 @@ type Dino struct {
 func (d *Dino) Show() {
 	d.sprite.SetSortIdx(d.rect.Min.Y)
 	d.sprite.ChangePos(d.rect)
-	d.sprite.Show(GfxBankDinos, api.MapBanksGet(MapBankDinos).GetArea(MapBankDinoAnimsArea))
+	d.sprite.Show(GfxBankDinos, API.MapBanksGet(MapBankDinos).GetArea(MapBankDinoAnimsArea))
 	d.sprite.ChangePalette(rand.Intn(4))
 	// d.anim = Anims[rand.Intn(len(Anims))]
 	if rand.Float64() <= 0.5 {
